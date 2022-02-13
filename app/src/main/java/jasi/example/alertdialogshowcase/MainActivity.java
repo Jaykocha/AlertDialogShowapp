@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
                     myDynamicAlert = new MyAlertDialog(MainActivity.this, MainActivity.this,
                             AlertOptions.create(AlertType.dynamicAlert));
                     myDynamicAlert.show(getSupportFragmentManager(), null);
-            String message = "This window will close automatically in %d seconds. Chose now (and wise) ;)";
-            new CountDownTimer(3000, 1000) {
+            String message = "This window will close automatically in %d seconds. Chose now or let it close on its own";
+            new CountDownTimer(9000, 1000) {
                 @SuppressLint("DefaultLocale")
                 @Override
                 public void onTick(long millisUntilFinished) {

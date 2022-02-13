@@ -29,10 +29,10 @@ public class AlertDialogView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        rect.right = displayMetrics.widthPixels - dp2px(20);
+        rect.right = this.getWidth();
         rect.top = 0;
         rect.left = 0;
-        rect.bottom = dp2px(270);
+        rect.bottom = this.getHeight();
         canvas.drawPath(shapePath(), drawPaint);
     }
 
@@ -52,7 +52,7 @@ public class AlertDialogView extends View {
         Path path = new Path();
         path.setFillType(Path.FillType.WINDING);
         path.addRoundRect(rect, 16, 16, Path.Direction.CW);
-        path.addCircle((displayMetrics.widthPixels - dp2px(19))/2f, 0, dp2px(64), Path.Direction.CCW);
+        path.addCircle((this.getWidth())/2f, 0, dp2px(64), Path.Direction.CCW);
         return  path;
     }
 

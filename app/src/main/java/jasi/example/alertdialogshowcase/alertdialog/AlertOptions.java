@@ -68,8 +68,8 @@ public class AlertOptions {
                 return new AlertOptions(
                         "Success Alert!",
                         "Bravo you successfully opened a success alert! Good job. Check out the dynamic alert as well!",
-                        "Zurück",
-                        "Beenden",
+                        "Back",
+                        "Finish",
                         R.drawable.icon_success,
                         true,
                         type);
@@ -94,10 +94,10 @@ public class AlertOptions {
                         type);
             default:
                 return new AlertOptions(
-                        "Unbekannter Fehler!",
-                        "Ups es ist etwas schief gelaufen :(",
+                        "Unknown Error",
+                        "Ups, something went wrong :(",
                         "",
-                        "Schließen",
+                        "close",
                         R.drawable.icon_warning,
                         false,
                         AlertType.unknownError

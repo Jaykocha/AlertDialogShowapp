@@ -7,38 +7,15 @@
     <FrameLayout
         android:id="@+id/transp_background"
         android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_height="310dp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <jasi.example.alertdialogshowcase.alertdialog.AlertDialogView
             android:layout_width="wrap_content"
-            android:layout_height="270dp"
+            android:layout_height="250dp"
             android:layout_gravity="bottom" />
-
-        <TextView
-            android:id="@+id/alert_dialog_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:text="Important Title"
-            android:textColor="@android:color/black"
-            android:textSize="24dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/alert_dialog_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="54dp"
-            android:padding="16dp"
-            android:text="Achtung, das hier ist ein Alert text. Bitte aufpassen und die Ens treffen so dass wir wissen was gut ist. Bitte wähle option."
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="18dp" />
 
         <FrameLayout
             android:id="@+id/alert_dialog_circle"
@@ -50,8 +27,8 @@
 
             <ImageView
                 android:id="@+id/alert_dialog_icon"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="84dp"
+                android:layout_height="84dp"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center"
                 android:elevation="4dp"
@@ -59,18 +36,45 @@
         </FrameLayout>
 
         <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginTop="128dp"
+                android:id="@+id/alert_dialog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Important Title"
+                android:textColor="@android:color/black"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/alert_dialog_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:text="Lorem ipsum bla blab alert dialog. Ipsum lorem lira loro linto if good bad or normal. Who knows nothing."
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_horizontal"
-            android:padding="8dp">
+            android:gravity="center"
+            android:layout_gravity="bottom">
 
             <TextView
                 android:id="@+id/alert_dialog_alternative_option"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_margin="12dp"
                 android:layout_weight="1"
                 android:text="Option 1"
                 android:textColor="@color/primary"
@@ -81,7 +85,7 @@
                 android:id="@+id/alert_dialog_main_option"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_margin="12dp"
                 android:background="@drawable/background_rounded_button_primary"
                 android:paddingStart="16dp"
                 android:paddingTop="4dp"
@@ -95,7 +99,6 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-
 
     </FrameLayout>
 
