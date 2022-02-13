@@ -1,10 +1,8 @@
 package jasi.example.alertdialogshowcase.alertdialog;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -57,7 +55,7 @@ public class MyAlertDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        final View customView = LayoutInflater.from(context).inflate(R.layout.alert_dialog_master, null);
+        final View customView = LayoutInflater.from(context).inflate(R.layout.alert_dialog_layout, null);
 
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
         alertBuilder.setView(customView);
