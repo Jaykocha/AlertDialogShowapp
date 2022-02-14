@@ -72,7 +72,7 @@ public class MyAlertDialog extends DialogFragment {
         textTV.setText(options.getText());
         alternativeOptionTV.setText(options.getAlternativeText());
         mainOptionTV.setText(options.getMainText());
-        alertBuilder.setCancelable(options.isCancelable());
+        setCancelable(options.isCancelable());
 
         if (options.getMainText().isEmpty()) {
             mainOptionTV.setVisibility(View.GONE);

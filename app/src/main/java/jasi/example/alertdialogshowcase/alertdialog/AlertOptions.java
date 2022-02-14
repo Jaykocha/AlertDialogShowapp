@@ -80,7 +80,7 @@ public class AlertOptions {
                         "",
                         "Proceed",
                         R.drawable.icon_primary,
-                        true,
+                        false,
                         type
                 );
             case dynamicAlert:
