@@ -29,13 +29,11 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
 
         primaryBtn.setOnClickListener(view -> new MyAlertDialog(
                 MainActivity.this,
-                MainActivity.this,
                 AlertOptions.create(AlertType.examplePrimary))
                 .show(getSupportFragmentManager(), null)
         );
 
         successBtn.setOnClickListener(view -> new MyAlertDialog(
-                MainActivity.this,
                 MainActivity.this,
                 AlertOptions.create(AlertType.exampleSuccess))
                 .show(getSupportFragmentManager(), null)
@@ -43,20 +41,18 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
 
         warningBtn.setOnClickListener(view -> new MyAlertDialog(
                 MainActivity.this,
-                MainActivity.this,
                 AlertOptions.create(AlertType.exampleWarning))
                 .show(getSupportFragmentManager(), null)
         );
 
         oneOptionBtn.setOnClickListener(view -> new MyAlertDialog(
                 MainActivity.this,
-                MainActivity.this,
                 AlertOptions.create(AlertType.exampleOneOption))
                 .show(getSupportFragmentManager(), null)
         );
 
         dynamicBtn.setOnClickListener(view -> {
-                    myDynamicAlert = new MyAlertDialog(MainActivity.this, MainActivity.this,
+                    myDynamicAlert = new MyAlertDialog(MainActivity.this,
                             AlertOptions.create(AlertType.dynamicAlert));
                     myDynamicAlert.show(getSupportFragmentManager(), null);
             String message = "This window will close automatically in %d seconds. Chose now or let it close on its own";
