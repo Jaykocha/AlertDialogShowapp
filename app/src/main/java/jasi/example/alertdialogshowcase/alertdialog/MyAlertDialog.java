@@ -26,15 +26,13 @@ public class MyAlertDialog extends DialogFragment {
         void alertDialogAlternativeOption(AlertType type);
     }
 
-    public MyAlertDialog(Context context, AlertDialogInterface callback, AlertOptions options){
-        this.context = context;
+    public MyAlertDialog(AlertDialogInterface callback, AlertOptions options){
         this.options = options;
         this.callback = callback;
     }
 
     private TextView textTV;
     private AlertDialog dialog;
-    private final Context context;
     private final AlertOptions options;
     private final AlertDialogInterface callback;
 
@@ -55,9 +53,9 @@ public class MyAlertDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        final View customView = LayoutInflater.from(context).inflate(R.layout.alert_dialog_layout, null);
+        final View customView = LayoutInflater.from(requireContext()).inflate(R.layout.alert_dialog_layout, null);
 
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(requireContext());
         alertBuilder.setView(customView);
 
         final ImageView iconIV = customView.findViewById(R.id.alert_dialog_icon);
@@ -67,7 +65,7 @@ public class MyAlertDialog extends DialogFragment {
         final TextView alternativeOptionTV = customView.findViewById(R.id.alert_dialog_alternative_option);
         final TextView mainOptionTV = customView.findViewById(R.id.alert_dialog_main_option);
 
-        iconIV.setImageDrawable(ContextCompat.getDrawable(context, options.getIcon()));
+        iconIV.setImageDrawable(ContextCompat.getDrawable(requireContext(), options.getIcon()));
         titleTV.setText(options.getTitle());
         textTV.setText(options.getText());
         alternativeOptionTV.setText(options.getAlternativeText());
@@ -96,11 +94,11 @@ public class MyAlertDialog extends DialogFragment {
         AlertCategory alertCategory = getAlertCategory(options.getType());
         if (alertCategory == AlertCategory.warning) {
             circleFL.setBackgroundResource(R.drawable.alert_dialog_circle_warning);
-            alternativeOptionTV.setTextColor(context.getColor(R.color.warning_color));
+            alternativeOptionTV.setTextColor(requireContext().getColor(R.color.warning_color));
             mainOptionTV.setBackgroundResource(R.drawable.background_rounded_button_warning);
         }else if(alertCategory == AlertCategory.success){
             circleFL.setBackgroundResource(R.drawable.alert_dialog_circle_success);
-            alternativeOptionTV.setTextColor(context.getColor(R.color.correct_green));
+            alternativeOptionTV.setTextColor(requireContext().getColor(R.color.correct_green));
             mainOptionTV.setBackgroundResource(R.drawable.background_rounded_button_success);
         }
 
