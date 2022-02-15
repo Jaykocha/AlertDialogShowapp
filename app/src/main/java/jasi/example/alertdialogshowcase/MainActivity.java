@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import jasi.example.alertdialogshowcase.alertdialog.AlertDialogManager;
 import jasi.example.alertdialogshowcase.alertdialog.AlertOptions;
 import jasi.example.alertdialogshowcase.alertdialog.AlertType;
 import jasi.example.alertdialogshowcase.alertdialog.MyAlertDialog;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
         setContentView(R.layout.activity_main);
 
         //instantiate shared ViewModel for alertDialogs
-        alertDialogViewModel = new ViewModelProvider(this).get(MyAlertDialogViewModel.class);
+        alertDialogViewModel = AlertDialogManager.initializeViewModel(this);
 
         Button primaryBtn = findViewById(R.id.primaryBtn);
         Button successBtn = findViewById(R.id.successBtn);
@@ -48,17 +49,24 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
         );
     }
 
+    private void showMyDialogFragment(AlertType type){
+        AlertDialogManager.showMyDialog(this,
+                type, alertDialogViewModel, this);
+    }
+
     private void updateAlertDialogTextEverySecond() {
         String message = "This window will close automatically in %d seconds. Chose now or let it close on its own";
         countDownTimer = new CountDownTimer(10000, 1000) {
             @SuppressLint("DefaultLocale")
             @Override
             public void onTick(long millisUntilFinished) {
-                AlertOptions currentOptions = alertDialogViewModel.getOptions().getValue();
-                if (currentOptions != null) {
-                    alertDialogViewModel.setOptions(currentOptions.updateText(
-                            String.format(message, (millisUntilFinished / 1000) + 1)
-                    ));
+                if (AlertDialogManager.isVisible(MainActivity.this, AlertType.dynamicAlert)) {
+                    AlertOptions currentOptions = alertDialogViewModel.getOptions().getValue();
+                    if (currentOptions != null) {
+                        alertDialogViewModel.setOptions(currentOptions.updateText(
+                                String.format(message, (millisUntilFinished / 1000) + 1)
+                        ));
+                    }
                 }
             }
 
@@ -68,13 +76,6 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
                 alertDialogViewModel.cancelAlert();
             }
         }.start();
-    }
-
-    private void showMyDialogFragment(AlertType type) {
-        MyAlertDialog dialog = MyAlertDialog.newInstance(this);
-        alertDialogViewModel.setOptions(AlertOptions.create(type));
-        alertDialogViewModel.showDialog(); //important otherwise won't show
-        dialog.show(getSupportFragmentManager(), null);
     }
 
     @Override
