@@ -7,19 +7,25 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import jasi.example.alertdialogshowcase.alertdialog.MyAlertDialog;
 import jasi.example.alertdialogshowcase.alertdialog.AlertOptions;
 import jasi.example.alertdialogshowcase.alertdialog.AlertType;
+import jasi.example.alertdialogshowcase.alertdialog.MyAlertDialog;
+import jasi.example.alertdialogshowcase.alertdialog.MyAlertDialogViewModel;
 
 public class MainActivity extends AppCompatActivity implements MyAlertDialog.AlertDialogInterface {
 
-    MyAlertDialog myDynamicAlert;
+    private MyAlertDialogViewModel alertDialogViewModel;
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //instantiate shared ViewModel for alertDialogs
+        alertDialogViewModel = new ViewModelProvider(this).get(MyAlertDialogViewModel.class);
 
         Button primaryBtn = findViewById(R.id.primaryBtn);
         Button successBtn = findViewById(R.id.successBtn);
@@ -27,49 +33,48 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
         Button oneOptionBtn = findViewById(R.id.oneOptionBtn);
         Button dynamicBtn = findViewById(R.id.dynamicBtn);
 
-        primaryBtn.setOnClickListener(view -> new MyAlertDialog(
-                MainActivity.this,
-                AlertOptions.create(AlertType.examplePrimary))
-                .show(getSupportFragmentManager(), null)
-        );
+        primaryBtn.setOnClickListener(view -> showMyDialogFragment(AlertType.examplePrimary));
 
-        successBtn.setOnClickListener(view -> new MyAlertDialog(
-                MainActivity.this,
-                AlertOptions.create(AlertType.exampleSuccess))
-                .show(getSupportFragmentManager(), null)
-        );
+        successBtn.setOnClickListener(view -> showMyDialogFragment(AlertType.exampleSuccess));
 
-        warningBtn.setOnClickListener(view -> new MyAlertDialog(
-                MainActivity.this,
-                AlertOptions.create(AlertType.exampleWarning))
-                .show(getSupportFragmentManager(), null)
-        );
+        warningBtn.setOnClickListener(view -> showMyDialogFragment(AlertType.exampleWarning));
 
-        oneOptionBtn.setOnClickListener(view -> new MyAlertDialog(
-                MainActivity.this,
-                AlertOptions.create(AlertType.exampleOneOption))
-                .show(getSupportFragmentManager(), null)
-        );
+        oneOptionBtn.setOnClickListener(view -> showMyDialogFragment(AlertType.exampleOneOption));
 
         dynamicBtn.setOnClickListener(view -> {
-                    myDynamicAlert = new MyAlertDialog(MainActivity.this,
-                            AlertOptions.create(AlertType.dynamicAlert));
-                    myDynamicAlert.show(getSupportFragmentManager(), null);
-            String message = "This window will close automatically in %d seconds. Chose now or let it close on its own";
-            new CountDownTimer(9000, 1000) {
-                @SuppressLint("DefaultLocale")
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    myDynamicAlert.updateText(String.format(message, (millisUntilFinished / 1000) + 1));
+                    showMyDialogFragment(AlertType.dynamicAlert);
+                    updateAlertDialogTextEverySecond();
                 }
-
-                @Override
-                public void onFinish() {
-                    myDynamicAlert.dismiss();
-                }
-            }.start();
-        }
         );
+    }
+
+    private void updateAlertDialogTextEverySecond() {
+        String message = "This window will close automatically in %d seconds. Chose now or let it close on its own";
+        countDownTimer = new CountDownTimer(10000, 1000) {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onTick(long millisUntilFinished) {
+                AlertOptions currentOptions = alertDialogViewModel.getOptions().getValue();
+                if (currentOptions != null) {
+                    alertDialogViewModel.setOptions(currentOptions.updateText(
+                            String.format(message, (millisUntilFinished / 1000) + 1)
+                    ));
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                //update ViewModels property cancel to false which get's then observed by
+                alertDialogViewModel.cancelAlert();
+            }
+        }.start();
+    }
+
+    private void showMyDialogFragment(AlertType type) {
+        MyAlertDialog dialog = MyAlertDialog.newInstance(this);
+        alertDialogViewModel.setOptions(AlertOptions.create(type));
+        alertDialogViewModel.showDialog(); //important otherwise won't show
+        dialog.show(getSupportFragmentManager(), null);
     }
 
     @Override
@@ -86,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
                 break;
             case dynamicAlert:
                 Toast.makeText(this, "A dynamic alert is something beautiful", Toast.LENGTH_SHORT).show();
+                countDownTimer.cancel();
                 break;
             case exampleOneOption:
                 Toast.makeText(this, "You didn't have any real choice dign't you?", Toast.LENGTH_SHORT).show();
@@ -107,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
                 break;
             case dynamicAlert:
                 Toast.makeText(this, "Selected alternative option. Ok.", Toast.LENGTH_SHORT).show();
+                countDownTimer.cancel();
                 break;
         }
     }

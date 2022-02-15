@@ -1,6 +1,7 @@
 package jasi.example.alertdialogshowcase.alertdialog;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 
 import jasi.example.alertdialogshowcase.R;
 
@@ -10,7 +11,7 @@ import jasi.example.alertdialogshowcase.R;
  */
 public class AlertOptions {
     private final String title;
-    private final String text;
+    private String text;
     private final String alternativeText;
     private final String mainText;
     private final int icon;
@@ -105,6 +106,18 @@ public class AlertOptions {
         }
     }
 
+    public AlertOptions updateText(String newText){
+        return new AlertOptions(
+                title,
+                newText,
+                alternativeText,
+                mainText,
+                icon,
+                isCancelable,
+                type
+        );
+    }
+
     public AlertType getType() {
         return type;
     }
@@ -132,4 +145,5 @@ public class AlertOptions {
     public boolean isCancelable() {
         return isCancelable;
     }
+
 }
