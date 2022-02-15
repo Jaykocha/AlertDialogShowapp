@@ -11,7 +11,7 @@ import jasi.example.alertdialogshowcase.R;
  */
 public class AlertOptions {
     private final String title;
-    private String text;
+    private final String text;
     private final String alternativeText;
     private final String mainText;
     private final int icon;
