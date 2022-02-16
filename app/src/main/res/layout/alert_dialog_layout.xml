@@ -7,14 +7,14 @@
     <FrameLayout
         android:id="@+id/transp_background"
         android:layout_width="match_parent"
-        android:layout_height="310dp"
+        android:layout_height="320dp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <jasi.example.alertdialogshowcase.alertdialog.AlertDialogView
             android:layout_width="wrap_content"
-            android:layout_height="250dp"
+            android:layout_height="260dp"
             android:layout_gravity="bottom" />
 
         <FrameLayout
