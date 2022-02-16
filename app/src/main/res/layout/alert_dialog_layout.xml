@@ -29,23 +29,23 @@
                 android:id="@+id/alert_dialog_icon"
                 android:layout_width="84dp"
                 android:layout_height="84dp"
-                android:scaleType="fitCenter"
                 android:layout_gravity="center"
                 android:elevation="4dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/icon_primary" />
         </FrameLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_marginTop="128dp"
                 android:id="@+id/alert_dialog_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="128dp"
                 android:text="Important Title"
                 android:textColor="@android:color/black"
                 android:textSize="24dp"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="8dp"
-                android:text="Lorem ipsum bla blab alert dialog. Ipsum lorem lira loro linto if good bad or normal. Who knows nothing."
+                android:text="Example Text"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18dp" />
@@ -67,8 +67,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/alert_dialog_alternative_option"
@@ -81,12 +81,12 @@
                 android:textSize="18dp" />
 
             <TextView
-                android:minWidth="66dp"
                 android:id="@+id/alert_dialog_main_option"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:background="@drawable/background_rounded_button_primary"
+                android:minWidth="66dp"
                 android:paddingStart="16dp"
                 android:paddingTop="4dp"
                 android:paddingEnd="16dp"

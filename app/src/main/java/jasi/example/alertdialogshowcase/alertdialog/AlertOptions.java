@@ -7,7 +7,7 @@ import jasi.example.alertdialogshowcase.R;
 
 
 /**
- * Class which holds the options for AlertDialogMaster
+ * Class which holds the options for MyAlertDialog
  */
 public class AlertOptions {
     private final String title;
@@ -19,7 +19,7 @@ public class AlertOptions {
     private final AlertType type;
 
     /**
-     * Class which holds the options for AlertDialogMaster
+     * Class which holds the options for MyAlertDialog
      *
      * @param title           String to show as title
      * @param text            String to show as text
