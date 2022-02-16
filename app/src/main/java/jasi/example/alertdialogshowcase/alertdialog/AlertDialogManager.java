@@ -12,7 +12,7 @@ public class AlertDialogManager {
      * @param owner if out of Activity usually it is enough to just call 'this' or 'ActivityName.this'.
      *              if initialized in a fragment always call requireActivity() instead
      * @return MyAlertDialogViewModel which holds alert dialogs options
-     * */
+     */
     public static MyAlertDialogViewModel initializeViewModel(ViewModelStoreOwner owner) {
         return new ViewModelProvider(owner).get(MyAlertDialogViewModel.class);
     }

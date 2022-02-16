@@ -13,6 +13,10 @@ import android.view.View;
 
 public class AlertDialogView extends View {
 
+    private final RectF rect;
+    private final DisplayMetrics displayMetrics;
+    // defines paint and canvas
+    private Paint drawPaint;
     public AlertDialogView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -20,11 +24,6 @@ public class AlertDialogView extends View {
         rect = new RectF();
         displayMetrics = getDisplayMetrics();
     }
-
-    // defines paint and canvas
-    private Paint drawPaint;
-    private final RectF rect;
-    private final DisplayMetrics displayMetrics;
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -44,19 +43,19 @@ public class AlertDialogView extends View {
     }
 
     // This conversion is needed as drawing requires the actual pixels but in XML we specify in dp
-    private int dp2px(int dp){
+    private int dp2px(int dp) {
         return (int) (dp * displayMetrics.density + 0.5f);
     }
 
-    private Path shapePath(){
+    private Path shapePath() {
         Path path = new Path();
         path.setFillType(Path.FillType.WINDING);
         path.addRoundRect(rect, 16, 16, Path.Direction.CW);
-        path.addCircle((this.getWidth())/2f, 0, dp2px(64), Path.Direction.CCW);
-        return  path;
+        path.addCircle((this.getWidth()) / 2f, 0, dp2px(64), Path.Direction.CCW);
+        return path;
     }
 
-    private DisplayMetrics getDisplayMetrics(){
+    private DisplayMetrics getDisplayMetrics() {
         return Resources.getSystem().getDisplayMetrics();
     }
 }

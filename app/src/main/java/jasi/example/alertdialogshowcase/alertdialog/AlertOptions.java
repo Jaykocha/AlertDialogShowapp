@@ -1,7 +1,6 @@
 package jasi.example.alertdialogshowcase.alertdialog;
 
 import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
 
 import jasi.example.alertdialogshowcase.R;
 
@@ -106,7 +105,7 @@ public class AlertOptions {
         }
     }
 
-    public AlertOptions updateText(String newText){
+    public AlertOptions updateText(String newText) {
         return new AlertOptions(
                 title,
                 newText,
