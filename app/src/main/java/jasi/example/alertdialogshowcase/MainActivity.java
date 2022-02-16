@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import jasi.example.alertdialogshowcase.alertdialog.AlertDialogManager;
 import jasi.example.alertdialogshowcase.alertdialog.AlertOptions;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
         );
     }
 
-    private void showMyDialogFragment(AlertType type){
+    private void showMyDialogFragment(AlertType type) {
         AlertDialogManager.showMyDialog(this,
                 type, alertDialogViewModel, this);
     }
@@ -60,13 +59,11 @@ public class MainActivity extends AppCompatActivity implements MyAlertDialog.Ale
             @SuppressLint("DefaultLocale")
             @Override
             public void onTick(long millisUntilFinished) {
-                if (AlertDialogManager.isVisible(MainActivity.this, AlertType.dynamicAlert)) {
-                    AlertOptions currentOptions = alertDialogViewModel.getOptions().getValue();
-                    if (currentOptions != null) {
-                        alertDialogViewModel.setOptions(currentOptions.updateText(
-                                String.format(message, (millisUntilFinished / 1000) + 1)
-                        ));
-                    }
+                AlertOptions currentOptions = alertDialogViewModel.getOptions().getValue();
+                if (currentOptions != null) {
+                    alertDialogViewModel.setOptions(currentOptions.updateText(
+                            String.format(message, (millisUntilFinished / 1000) + 1)
+                    ));
                 }
             }
 
